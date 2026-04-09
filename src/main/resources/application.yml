@@ -1,0 +1,13 @@
+spring:
+  datasource:
+    driver-class-name: org.postgresql.Driver  # MySQL用 com.mysql.cj.jdbc.Driver
+    url: jdbc:postgresql://localhost:5432/lab_db  # MySQL改为 jdbc:mysql://localhost:3306/lab_db?useUnicode=true&characterEncoding=utf-8&serverTimezone=Asia/Shanghai
+    username: postgres
+    password: 123456  # 替换为你的数据库密码
+
+mybatis-plus:
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl   # 开启SQL日志输出
+  global-config:
+    db-config:
+      id-type: auto   # 主键自增策略
