@@ -1,13 +1,21 @@
+server:
+  port: 8080   # 默认端口，可自行修改
+
 spring:
   datasource:
-    driver-class-name: org.postgresql.Driver  # MySQL用 com.mysql.cj.jdbc.Driver
-    url: jdbc:postgresql://localhost:5432/lab_db  # MySQL改为 jdbc:mysql://localhost:3306/lab_db?useUnicode=true&characterEncoding=utf-8&serverTimezone=Asia/Shanghai
+    driver-class-name: org.postgresql.Driver
+    url: jdbc:postgresql://localhost:5432/postgres
     username: postgres
-    password: 123456  # 替换为你的数据库密码
+    password: 123456
+  data:
+    redis:
+      host: 127.0.0.1
+      port: 6379
+      # password: yourredispassword   # 如果你的 Redis 设置了密码，取消注释并填写
 
 mybatis-plus:
   configuration:
-    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl   # 开启SQL日志输出
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl   # 开启 SQL 日志
   global-config:
     db-config:
       id-type: auto   # 主键自增策略

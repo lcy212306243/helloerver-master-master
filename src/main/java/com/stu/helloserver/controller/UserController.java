@@ -1,40 +1,34 @@
 package com.stu.helloserver.controller;
 
 import com.stu.helloserver.common.Result;
-import com.stu.helloserver.dto.UserDTO;
+import com.stu.helloserver.dto.UserDetailVO;
 import com.stu.helloserver.service.UserService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api/users")
 public class UserController {
 
-    @Autowired
-    private UserService userService;
+    private final UserService userService;
 
-    // 1. 用户注册
-    @PostMapping
-    public Result<String> register(@RequestBody UserDTO userDTO) {
-        return userService.register(userDTO);
+    // 手动构造器注入，彻底告别 Lombok 问题
+    public UserController(UserService userService) {
+        this.userService = userService;
     }
 
-    // 2. 用户登录
-    @PostMapping("/login")
-    public Result<String> login(@RequestBody UserDTO userDTO) {
-        return userService.login(userDTO);
+    @GetMapping("/{id}/detail")
+    public Result<UserDetailVO> getUserDetail(@PathVariable("id") Long userId) {
+        return userService.getUserDetail(userId);
     }
 
-    // 3. 根据id查询用户
-    @GetMapping("/{id}")
-    public Result<String> getUser(@PathVariable("id") Long id) {
-        return userService.getUserById(id);
+    @PutMapping("/{id}/detail")
+    public Result<String> updateUserInfo(@PathVariable("id") Long userId,
+                                         @RequestBody UserDetailVO userDetailVO) {
+        return userService.updateUserInfo(userId, userDetailVO);
     }
-    @GetMapping("/page")
-    public Result<Object> getUserPage(
-            @RequestParam(defaultValue = "1") Integer pageNum,
-            @RequestParam(defaultValue = "5") Integer pageSize
-    ) {
-        return userService.getUserPage(pageNum, pageSize);
+
+    @DeleteMapping("/{id}")
+    public Result<String> deleteUser(@PathVariable("id") Long userId) {
+        return userService.deleteUser(userId);
     }
 }
