@@ -1,0 +1,23 @@
+spring:
+  datasource:
+    driver-class-name: org.postgresql.Driver
+    url: jdbc:postgresql://localhost:5432/lab_db
+    username: postgres
+    password: 123456
+  web:
+    resources:
+      static-locations: classpath:/static/
+server:
+  port: 8081
+
+# JWT 配置（与 spring 平级）
+jwt:
+  secret: your-256-bit-secret-key-here-must-be-long-enough
+  expiration: 86400000
+
+mybatis-plus:
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+  global-config:
+    db-config:
+      id-type: auto
